@@ -8,12 +8,11 @@ export interface Product {
   productPrice: number;
   productLeftCount: number;
   productSize: ProductSize;
-  productVolume: number;
   productDesc?: string;
   productImages: string[];
   productViews: number;
-  createdAt:Date;
-  updatedAt:Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 export interface ProductInquery {
   order: string;
@@ -21,4 +20,9 @@ export interface ProductInquery {
   limit: number;
   productCollection?: ProductCollection;
   search?: string;
+}
+
+export interface ProductPage {
+  products: Product[];
+  pagination: { page: number; limit: number; total: number; totalPages: number };
 }

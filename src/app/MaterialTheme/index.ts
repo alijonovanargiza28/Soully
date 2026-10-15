@@ -1,8 +1,7 @@
-import { createTheme } from "@mui/material/styles";
 import { common } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 import shadow from "./shadow";
 import typography from "./typography";
-import { maxWidth } from "@mui/system";
 
 /**
  * LIGHT THEME (DEFAULT)

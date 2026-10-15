@@ -1,133 +1,148 @@
-import React from "react";
+import TabPanel from "@mui/lab/TabPanel";
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
-import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
+import { mediaUrl } from "../../../lib/media";
+
 import { createSelector } from "reselect";
 import { retriveProcessOrders } from "./selector";
-import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
-import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
-import { useSelector } from "react-redux";
-import { useGlobal } from "../../hooks/useGlobals";
-import { OrderStatus } from "../../../lib/enums/order.enum";
-import OrderService from "../../services/OrderService";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
-import { T } from "../../../lib/types/common";
 
-// REDUX SLICE & SELECTOR
-const processOrederRetriever = createSelector(
-  retriveProcessOrders,
-  (processOrders) => ({ processOrders }),
-);
+import { Messages } from "../../../lib/config";
+import { Product } from "../../../lib/types/product";
+
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
+
+import { MouseEvent } from "react";
+import { useSelector } from "react-redux";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { useGlobal } from "../../hooks/useGlobals";
+import OrderService from "../../services/OrderService";
+
+const processOrderRetriever = createSelector(retriveProcessOrders, (processOrders) => ({
+  processOrders,
+}));
+
 interface ProcessOrdersProps {
   setValue: (input: string) => void;
 }
 
 export default function ProcessOrders(props: ProcessOrdersProps) {
   const { setValue } = props;
+
   const { authMember, setOrderBuilder } = useGlobal();
-  const { processOrders } = useSelector(processOrederRetriever);
 
-  // HANDLERS
+  const { processOrders } = useSelector(processOrderRetriever);
 
-  const finishOrderHandler = async (e: T) => {
+  const finishOrderHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
-      if (!authMember) throw new Error(Messages.error2);
-      //  PAYMENT PROCESS
+      if (!authMember) {
+        throw new Error(Messages.error2);
+      }
+
       const orderId = e.currentTarget.value;
+
       const input: OrderUpdateInput = {
-        orderId: orderId,
+        orderId,
         orderStatus: OrderStatus.FINISH,
       };
 
       const confirmation = window.confirm("Have you received your order?");
+
       if (confirmation) {
         const order = new OrderService();
+
         await order.updateOrder(input);
+
         setValue("3");
+
         setOrderBuilder(new Date());
       }
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err).then();
     }
   };
 
   return (
-    <TabPanel value={"2"}>
+    <TabPanel value="2" className="order-tab-panel">
       <Stack>
-        {processOrders?.map((order: Order) => {console.log("order =", order);
+        {processOrders?.map((order: Order) => {
           return (
-            <Box key={order._id} className={"order-main-box"}>
-              <Box className={"order-box-scroll"}>
+            <Box key={order._id} className="order-main-box">
+              <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
                   const product: Product = order?.productData?.filter(
                     (ele: Product) => item.productId === ele._id,
                   )[0]!;
 
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  if (!product) return null;
+
+                  const imagePath = mediaUrl(product.productImages[0]);
+
                   return (
-                    <Box key={item._id} className={"orders-name-price"}>
-                      <img src={imagePath} className={"order-dish-img"} />
-                      <p className={"title-dish"}>{product.productName}</p>
-                      <Box className={"price-box"}>
-                        <p>{item.itemPrice}</p>
-                        <img src={"/icons/close.svg"} />
+                    <Box key={item._id} className="orders-name-price">
+                      <img
+                        src={imagePath}
+                        className="order-product-img"
+                        alt={product.productName}
+                      />
+
+                      <p className="product-title">{product.productName}</p>
+
+                      <Box className="price-box">
+                        <p>${item.itemPrice}</p>
+
+                        <span>×</span>
+
                         <p>{item.itemQuantity}</p>
-                        <img src={"/icons/pause.svg"} />
-                        <p style={{ marginLeft: "15px" }}>
-                          {item.itemQuantity * item.itemPrice}
-                        </p>
+
+                        <strong>${item.itemQuantity * item.itemPrice}</strong>
                       </Box>
                     </Box>
                   );
                 })}
               </Box>
 
-              <Box className={"total-price-box"}>
-                <Box className={"box-total"}>
-                  <p>Product price</p>
-                  <p>${order.orderTotal - order.orderDelivery}</p>
-                  <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
-                  <p>delivery cost</p>
-                  <p>${order.orderDelivery}</p>
-                  <img
-                    src={"/icons/pause.svg"}
-                    style={{ marginLeft: "20px" }}
-                  />
-                  <p>Total</p>
-                  <p>${order.orderTotal}</p>
+              <Box className="total-price-box">
+                <Box className="box-total">
+                  <div>
+                    <span>Subtotal</span>
+                    <strong>${order.orderTotal - order.orderDelivery}</strong>
+                  </div>
+
+                  <div>
+                    <span>Delivery</span>
+                    <strong>${order.orderDelivery}</strong>
+                  </div>
+
+                  <div className="total-final">
+                    <span>Total</span>
+                    <strong>${order.orderTotal}</strong>
+                  </div>
                 </Box>
-                <p className={"data-compl"}>
-                  {moment().format("YY-MM-DD HH:mm")}
-                </p>
+
+                <p className="data-compl">{moment(order.updatedAt).format("DD MMM YYYY")}</p>
+
                 <Button
                   value={order._id}
                   variant="contained"
-                  className={"verify-button"}
+                  className="verify-button"
                   onClick={finishOrderHandler}
                 >
-                  Verify to Fulfil
+                  Received
                 </Button>
               </Box>
             </Box>
           );
         })}
 
-        {!processOrders ||
-          (processOrders.length === 0 && (
-            <Box
-              display={"flex"}
-              flexDirection={"row"}
-              justifyContent={"center"}
-            >
-              <img
-                src={"/icons/noimage-list.svg"}
-                style={{ width: 300, height: 300 }}
-              />
-            </Box>
-          ))}
+        {(!processOrders || processOrders.length === 0) && (
+          <Box className="empty-orders">
+            <img src="/icons/noimage-list.svg" alt="No orders" />
+
+            <p>No processing orders yet</p>
+          </Box>
+        )}
       </Stack>
     </TabPanel>
   );

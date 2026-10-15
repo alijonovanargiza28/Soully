@@ -37,6 +37,5 @@ export interface MemberUpdateInput {
   memberPassword?: string;
   memberAdress?: string;
   memberDesc?: string;
-  memberImage?: string;
-  
+  memberImage?: File;
 }

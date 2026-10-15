@@ -1,3 +1,15 @@
 {
-  "name": "Bumarak"
+  "short_name": "Soully",
+  "name": "Soully Flowers",
+  "icons": [
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#9b6873",
+  "background_color": "#fff5f7"
 }

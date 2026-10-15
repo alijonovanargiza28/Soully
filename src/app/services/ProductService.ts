@@ -1,42 +1,22 @@
-import axios from "axios"
+import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Product, ProductInquery } from "../../lib/types/product";
+import { Product, ProductInquery, ProductPage } from "../../lib/types/product";
 
-class ProductService{
-    private readonly path:string;
-
-    constructor(){
-        this.path = serverApi
-    }
-    public async getProducts(input:ProductInquery): Promise<Product[]>{
-        try {
-         let url = `${this.path}/product/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;
-            if(input.productCollection) url +=`&productCollection=${input.productCollection}`;
-            if(input.search)url +=`&search=${input.search}`;
-            const result = await axios.get(url);
-            console.log("getProducts", result)
-             return result.data
-
-        } catch (err) {
-            console.log("Error, get product", err);
-            throw err;
-        }
-    }
-    public async getProduct(productId:string):Promise<Product>{
-        try {
-            const url =`${this.path}/product/${productId}`;
-            const result = await axios.get(url, {withCredentials:true})
-
-            console.log("getProduct", result)
-
-            return result.data
-        } catch (err) {
-            console.log("getProduct", err);
-            throw err
-
-        }
-
-    }
+class ProductService {
+  public async getProductPage(input: ProductInquery): Promise<ProductPage> {
+    const { data } = await axios.get(`${serverApi}/product/all`, { params: input });
+    if (!Array.isArray(data.result) || !data.pagination)
+      throw new Error("The API must be restarted with the updated product pagination endpoint.");
+    return { products: data.result, pagination: data.pagination };
+  }
+  public async getProducts(input: ProductInquery): Promise<Product[]> {
+    return (await this.getProductPage(input)).products;
+  }
+  public async getProduct(id: string): Promise<Product> {
+    const { data } = await axios.get(`${serverApi}/product/${encodeURIComponent(id)}`, {
+      withCredentials: true,
+    });
+    return data.result ?? data;
+  }
 }
-
-export default ProductService
+export default ProductService;

@@ -1,11 +1,6 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import {
-  LoginInput,
-  Member,
-  MemberInput,
-  MemberUpdateInput,
-} from "../../lib/types/member";
+import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../../lib/types/member";
 
 class MemberService {
   private readonly path: string;
@@ -14,30 +9,14 @@ class MemberService {
     this.path = serverApi;
   }
 
-  public async getTopUsers(): Promise<Member[]> {
+  public async getSeller(): Promise<Member> {
     try {
-      const url = this.path + "/member/top-users";
+      const url = this.path + "/member/seller";
       const result = await axios.get(url);
-
-      console.log("getTopUsers", result);
 
       return result.data;
     } catch (err) {
-      console.log("Error, getTopUsers", err);
-      throw err;
-    }
-  }
-
-  public async getRestaurant(): Promise<Member> {
-    try {
-      const url = this.path + "/member/restaurant";
-      const result = await axios.get(url);
-
-      console.log("getRestaurant", result);
-
-      return result.data;
-    } catch (err) {
-      console.log("Error, getRestaurant", err);
+      console.error("Error, getSeller", err);
       throw err;
     }
   }
@@ -50,15 +29,11 @@ class MemberService {
         withCredentials: true,
       });
 
-      console.log("signup", result);
-
       const member: Member = result.data.member;
-
-      localStorage.setItem("memberData", JSON.stringify(member));
 
       return member;
     } catch (err) {
-      console.log("Error, signup", err);
+      console.error("Error, signup", err);
       throw err;
     }
   }
@@ -71,15 +46,11 @@ class MemberService {
         withCredentials: true,
       });
 
-      console.log("login", result);
-
       const member: Member = result.data.member;
-
-      localStorage.setItem("memberData", JSON.stringify(member));
 
       return member;
     } catch (err) {
-      console.log("Error, login", err);
+      console.error("Error, login", err);
       throw err;
     }
   }
@@ -95,10 +66,8 @@ class MemberService {
           withCredentials: true,
         },
       );
-
-      localStorage.removeItem("memberData");
     } catch (err) {
-      console.log("Error, logout", err);
+      console.error("Error, logout", err);
       throw err;
     }
   }
@@ -109,8 +78,8 @@ class MemberService {
 
       formData.append("memberNick", input.memberNick || "");
       formData.append("memberPhone", input.memberPhone || "");
-      formData.append("memberAdress", input.memberAdress || "");
-      formData.append("memberDesc", input.memberDesc || "");
+      if (input.memberAdress !== undefined) formData.append("memberAdress", input.memberAdress);
+      if (input.memberDesc !== undefined) formData.append("memberDesc", input.memberDesc);
 
       if (input.memberImage) {
         formData.append("memberImage", input.memberImage);
@@ -118,20 +87,13 @@ class MemberService {
 
       const result = await axios.post(`${this.path}/member/update`, formData, {
         withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
       });
-
-      console.log("updateMember", result);
 
       const member: Member = result.data;
 
-      localStorage.setItem("memberData", JSON.stringify(member));
-
       return member;
     } catch (err) {
-      console.log("Error, updateMember", err);
+      console.error("Error, updateMember", err);
       throw err;
     }
   }

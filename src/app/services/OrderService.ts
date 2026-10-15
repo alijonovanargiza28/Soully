@@ -1,13 +1,7 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
+import { Order, OrderInquiry, OrderItemInput, OrderUpdateInput } from "../../lib/types/order";
 import { CartItem } from "../../lib/types/search";
-import {
-  OrderItemInput,
-  Order,
-  OrderInquiry,
-  OrderUpdateInput,
-} from "../../lib/types/order";
-import { OrderStatus } from "../../lib/enums/order.enum";
 
 class OrderService {
   private readonly path: string;
@@ -24,31 +18,28 @@ class OrderService {
           productId: cartItem._id,
         };
       });
-      const url = `${this.path + "/order/create"}`
+      const url = `${this.path + "/order/create"}`;
       const result = await axios.post(url, orderItems, {
         withCredentials: true,
       });
-      console.log("createOrder:", result);
 
-      return result.data;
+      return result.data.result;
     } catch (err) {
-      console.log("Error createOrder", err);
+      console.error("Error createOrder", err);
       throw err;
     }
   }
 
   public async getMyOrders(input: OrderInquiry): Promise<Order[]> {
     try {
-      axios.defaults.withCredentials = true;
       const url = `${this.path}/order/all`;
       const query = `?page=${input.page}&limit=${input.limit}&orderStatus=${input.orderStatus}`;
 
       const result = await axios.get(url + query, { withCredentials: true });
-      console.log("GetmyOrders", result);
 
-      return result.data.result
+      return result.data.result;
     } catch (err) {
-      console.log("Error getMyOrders", err);
+      console.error("Error getMyOrders", err);
       throw err;
     }
   }
@@ -56,11 +47,11 @@ class OrderService {
   public async updateOrder(input: OrderUpdateInput): Promise<Order> {
     try {
       const url = `${this.path}/order/update`;
-      const result = await axios.post(url,input,{withCredentials:true})
-      console.log("updateOrder", result)
-      return result.data
+      const result = await axios.post(url, input, { withCredentials: true });
+
+      return result.data.result;
     } catch (err) {
-      console.log("Error createOrder", err);
+      console.error("Error createOrder", err);
       throw err;
     }
   }

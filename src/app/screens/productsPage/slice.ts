@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Member } from "../../../lib/types/member";
+import { Product } from "../../../lib/types/product";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductsPageState } from "../../../lib/types/screen";
 
 const initialState: ProductsPageState = {
-  restaurant: null,
+  seller: null,
   chosenProduct: null,
   products: [],
 };
@@ -10,21 +12,22 @@ const initialState: ProductsPageState = {
 const productsPageSlice = createSlice({
   name: "productsPage",
   initialState,
+
   reducers: {
-    setRestaurant: (state, action) => {
-      state.restaurant = action.payload.result
+    setProducts: (state, action: PayloadAction<Product[]>) => {
+      state.products = action.payload;
     },
-    setChosenProduct: (state, action) => {
-      state.chosenProduct = action.payload
+
+    setChosenProduct: (state, action: PayloadAction<Product | null>) => {
+      state.chosenProduct = action.payload;
     },
-    setProducts: (state, action) => {
-      state.products = action.payload.result
+
+    setSeller: (state, action: PayloadAction<Member | null>) => {
+      state.seller = action.payload;
     },
   },
 });
 
-export const { setRestaurant, setChosenProduct, setProducts } =
-  productsPageSlice.actions;
+export const { setProducts, setChosenProduct, setSeller } = productsPageSlice.actions;
 
-  const ProductPageReducer =productsPageSlice.reducer;
-  export default ProductPageReducer
+export default productsPageSlice.reducer;

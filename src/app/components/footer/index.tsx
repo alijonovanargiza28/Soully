@@ -1,87 +1,124 @@
-import React from "react";
 import { Box, Container, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useGlobal } from "../../hooks/useGlobals";
 
-const Footers = styled.div`
+const Footers = styled.footer`
   width: 100%;
-  height: 590px;
-  display: flex;
-  background: #343434;
-  background-size: cover;
+  background: #fff5f7;
+  border-top: 1px solid #f1d9df;
+  padding: 70px 0 30px;
+
+  .foot-category-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2d2d;
+    font-family: Poppins;
+  }
+
+  .foot-category-link a,
+  .find-us {
+    text-decoration: none;
+    color: #8a5d68;
+    font-size: 15px;
+    font-family: Poppins;
+    transition: 0.3s;
+  }
+
+  .foot-category-link a:hover {
+    color: #e91e63;
+  }
+
+  .copyright-txt {
+    color: #9b6873;
+    font-size: 14px;
+    font-family: Poppins;
+  }
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 export default function Footer() {
-  const authMember = null;
+  const { authMember } = useGlobal();
 
   return (
     <Footers>
-      <Container>
-        <Stack flexDirection={"row"} sx={{ mt: "94px" }}>
-          <Stack flexDirection={"column"} style={{ width: "340px" }}>
-            <Box>
-              <img width={"100px"} src={"/icons/bumarak.svg"} />
+      <Container maxWidth="lg">
+        <Stack direction={{ xs: "column", md: "row" }} spacing={4} justifyContent="space-between">
+          {/* LEFT */}
+          <Stack sx={{ width: { xs: "100%", md: 340 } }}>
+            <Box
+              sx={{
+                fontSize: 32,
+                fontWeight: 700,
+                color: "#9b6873",
+                fontFamily: "Poppins",
+              }}
+            >
+              Soully
             </Box>
-            <Box className={"foot-desc-txt"}>
-              Focusing on the gourmet Turkish breakfast as well as the youth
-              society, ZEN Bumarak Gurme aims to bring Turkish cuisine back. ZEN
-              Bumarak Gurme creates an illusion with its cuisine.
+
+            <Box
+              sx={{
+                mt: 3,
+                color: "#9b6873",
+                fontSize: 15,
+                lineHeight: "26px",
+              }}
+            >
+              Soully — flowers made with love.
+              <br />
+              We create beautiful bouquets and floral arrangements for every special moment.
             </Box>
-            <Box className="sns-context">
-              <img src={"/icons/facebook.svg"} />
-              <img src={"/icons/twitter.svg"} />
-              <img src={"/icons/instagram.svg"} />
-              <img src={"/icons/youtube.svg"} />
-            </Box>
-          </Stack>
-          <Stack sx={{ ml: "288px" }} flexDirection={"row"}>
-            <Stack>
-              <Box>
-                <Box className={"foot-category-title"}>Bo'limlar</Box>
-                <Box className={"foot-category-link"}>
-                  <Link to="/">Home</Link>
-                  <Link to="/products">Products</Link>
-                  {authMember && <Link to="/orders">Orders</Link>}
-                  <Link to="/help">Help</Link>
-                </Box>
-              </Box>
+
+            <Stack direction="row" gap={2} mt={3}>
+              <img src="/icons/facebook.svg" alt="Facebook" width={22} />
+              <img src="/icons/twitter.svg" alt="Twitter" width={22} />
+              <img src="/icons/instagram.svg" alt="Instagram" width={22} />
+              <img src="/icons/youtube.svg" alt="YouTube" width={22} />
             </Stack>
-            <Stack sx={{ ml: "100px" }}>
-              <Box>
-                <Box className={"foot-category-title"}>Find us</Box>
-                <Box
-                  flexDirection={"column"}
-                  sx={{ mt: "20px" }}
-                  className={"foot-category-link"}
-                  justifyContent={"space-between"}
-                >
-                  <Box flexDirection={"row"} className={"find-us"}>
-                    <span>L.</span>
-                    <div>Downtown, Dubai</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>P.</span>
-                    <div>+971 4 554 7777</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>E.</span>
-                    <div>devexuz@gmail.com</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>H.</span>
-                    <div>Visit 24 hours</div>
-                  </Box>
-                </Box>
-              </Box>
+          </Stack>
+
+          {/* EXPLORE */}
+          <Stack sx={{ minWidth: 150 }}>
+            <Box className="foot-category-title" sx={{ color: "#9b6873" }}>
+              Explore
+            </Box>
+
+            <Stack className="foot-category-link" gap={1.5} mt={2.5}>
+              <Link to="/">Home</Link>
+              <Link to="/products">Flowers</Link>
+              <Link to="/products">Bouquets</Link>
+              {authMember && <Link to="/orders">Orders</Link>}
+              <Link to="/help">Help</Link>
+            </Stack>
+          </Stack>
+
+          {/* CONTACT */}
+          <Stack sx={{ minWidth: 250 }}>
+            <Box className="foot-category-title">Contact Us</Box>
+
+            <Stack gap={2} mt={2.5}>
+              <Box className="find-us">📍 Tashkent, Uzbekistan</Box>
+              <Box className="find-us">📞 +998 90 123 45 67</Box>
+              <Box className="find-us">✉️ hello@soully.uz</Box>
+              <Box className="find-us">🕐 Mon – Sun, 09:00 – 22:00</Box>
             </Stack>
           </Stack>
         </Stack>
-        <Stack
-          style={{ border: "1px solid #C5C8C9", width: "100%", opacity: "0.2" }}
-          sx={{ mt: "80px" }}
-        ></Stack>
-        <Stack className={"copyright-txt"}>
-          © Copyright Devex Global, All rights reserved.
+
+        <Box
+          sx={{
+            borderTop: "1px solid #e5c8cf",
+            opacity: 0.6,
+            mt: 7,
+          }}
+        />
+
+        <Stack alignItems="center" mt={3}>
+          <Box className="copyright-txt">© 2026 Soully Flowers. All rights reserved.</Box>
         </Stack>
       </Container>
     </Footers>

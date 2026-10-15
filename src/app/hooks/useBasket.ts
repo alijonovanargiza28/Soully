@@ -1,71 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartItem } from "../../lib/types/search";
 
+export function readCart(): CartItem[] {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem("cartData") || "[]");
+    if (!Array.isArray(value)) return [];
+    return value.filter(
+      (item): item is CartItem =>
+        item &&
+        typeof item._id === "string" &&
+        typeof item.name === "string" &&
+        typeof item.image === "string" &&
+        Number.isFinite(item.price) &&
+        item.price >= 0 &&
+        Number.isInteger(item.quantity) &&
+        item.quantity > 0,
+    );
+  } catch {
+    return [];
+  }
+}
+
 const useBasket = () => {
-  const cartJson: string | null = localStorage.getItem("cartData");
-  const currentCart = cartJson ? JSON.parse(cartJson) : [];
-  const [cartItems, setCartItems] = useState<CartItem[]>(currentCart);
-
-
-  // HANDLERS
-  const onAdd = (input: CartItem) => {
-    const exist = cartItems.find((item: CartItem) => item._id === input._id);
-    if (exist) {
-      //if exist => agar mahsulot savatda mavjud bolsa
-      const cartUpdate = cartItems.map((item: CartItem) =>
-        item._id === input._id
-          ? { ...exist, quantity: exist.quantity + 1 }
-          : item,
-      );
-      setCartItems(cartUpdate);
-      localStorage.setItem("cartData", JSON.stringify(cartUpdate));
-    } else {
-      const cartUpdate = [...cartItems, { ...input }];
-      setCartItems(cartUpdate);
-      localStorage.setItem("cartData", JSON.stringify(cartUpdate));
+  const [cartItems, setCartItems] = useState<CartItem[]>(readCart);
+  useEffect(() => {
+    try {
+      if (cartItems.length) localStorage.setItem("cartData", JSON.stringify(cartItems));
+      else localStorage.removeItem("cartData");
+    } catch {
+      // The cart remains available when browser storage is disabled or full.
     }
-  };
+  }, [cartItems]);
 
-  const onRemove = (input: CartItem) => {
-    const exist: any = cartItems.find(
-      (item: CartItem) => item._id === input._id,
+  const onAdd = (input: CartItem) =>
+    setCartItems((items) => {
+      const exists = items.some((item) => item._id === input._id);
+      return exists
+        ? items.map((item) =>
+            item._id === input._id ? { ...item, quantity: item.quantity + 1 } : item,
+          )
+        : [...items, { ...input, quantity: 1 }];
+    });
+  const onRemove = (input: CartItem) =>
+    setCartItems((items) =>
+      items
+        .map((item) => (item._id === input._id ? { ...item, quantity: item.quantity - 1 } : item))
+        .filter((item) => item.quantity > 0),
     );
-    if (exist.quantity === 1) {
-      const cartUpdate = cartItems.filter(
-        (item: CartItem) => item._id !== input._id,
-      );
-      setCartItems(cartUpdate);
-      localStorage.setItem("cartData", JSON.stringify(cartUpdate));
-    } else {
-      const cartUpdate = cartItems.map((item: CartItem) =>
-        item._id === input._id
-          ? { ...exist, quantity: exist.quantity - 1 }
-          : item,
-      );
-       setCartItems(cartUpdate);
-  localStorage.setItem("cartData", JSON.stringify(cartUpdate));
-
-    }
-  };
-
-  const onDelete = (input: CartItem) => {
-    const cartUpdate = cartItems.filter(
-      (item: CartItem) => item._id !== input._id,
-    );
-    setCartItems(cartUpdate);
-    localStorage.setItem("cartData", JSON.stringify(cartUpdate));
-  };
-
-  const onDeleteAll = () => {
-    setCartItems([]);
-    localStorage.removeItem("cartData");
-  };
-  return {
-    cartItems,
-    onAdd,
-    onRemove,
-    onDelete,
-    onDeleteAll,
-  };
+  const onDelete = (input: CartItem) =>
+    setCartItems((items) => items.filter((item) => item._id !== input._id));
+  const onDeleteAll = () => setCartItems([]);
+  return { cartItems, onAdd, onRemove, onDelete, onDeleteAll };
 };
 export default useBasket;

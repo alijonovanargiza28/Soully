@@ -1,10 +1,10 @@
+import { Logout } from "@mui/icons-material";
 import { Box, Button, Container, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import Basket from "./Basket";
+import { mediaUrl } from "../../../lib/media";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobal } from "../../hooks/useGlobals";
-import { serverApi } from "../../../lib/config";
-import { Logout } from "@mui/icons-material";
+import Basket from "./Basket";
 
 interface OtherNavbarProps {
   cartItems: CartItem[];
@@ -27,7 +27,6 @@ export default function OtherNavbar(props: OtherNavbarProps) {
     onRemove,
     onDelete,
     onDeleteAll,
-    setSignupOpen,
     setLoginOpen,
     handleLogoutClick,
     anchorEl,
@@ -41,12 +40,15 @@ export default function OtherNavbar(props: OtherNavbarProps) {
         <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" src="/icons/bumarak.svg" />
+              <img className="brand-logo" src="/img/logoo.png" alt="Soully" />
             </NavLink>
           </Box>
           <Stack className="links">
             <Box className={"hover-line"}>
               <NavLink to="/">Home</NavLink>
+            </Box>
+            <Box className={"hover-line"}>
+              <NavLink to="/about">About</NavLink>
             </Box>
             <Box className={"hover-line"}>
               <NavLink to="/products" activeClassName={"underline"}>
@@ -95,11 +97,19 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                 className="user-avatar"
                 src={
                   authMember?.memberImage
-                    ? `${serverApi}/${authMember?.memberImage}`
+                    ? mediaUrl(authMember?.memberImage)
                     : "/icons/default-user.svg"
                 }
-                aria-haspopup={"true"}
+                role="button"
+                alt="Open account menu"
                 onClick={handleLogoutClick}
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    event.currentTarget.click();
+                  }
+                }}
               />
             )}
             <Menu

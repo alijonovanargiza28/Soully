@@ -1,4 +1,3 @@
-
 import { OrderStatus } from "../enums/order.enum";
 import { Product } from "./product";
 
@@ -33,7 +32,6 @@ export interface Order {
   orderData?: Product[];
   productData?: Product[];
 }
-
 
 export interface OrderInquiry {
   page: number;

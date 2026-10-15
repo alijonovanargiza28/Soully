@@ -1,30 +1,52 @@
-import React from "react";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
+import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined";
 import { Box, Container, Stack } from "@mui/material";
-import Divider from "../../components/divider";
 
 export default function Statistics() {
   return (
-    <div className={"static-frame"}>
+    <div className="static-frame">
       <Container>
-        <Stack className="info">
-          <Stack className="static-box">
-            <Box className="static-num">12</Box>
-            <Box className="static-text">Restaurants</Box>
+        <Stack className="benefits">
+          <Stack className="benefit-box">
+            <Box className="benefit-icon">
+              <LocalShippingOutlinedIcon />
+            </Box>
+
+            <Box className="benefit-title">Free Delivery</Box>
+
+            <Box className="benefit-text">Free delivery on selected orders</Box>
           </Stack>
-          <Divider height="64" width="2" bg="#E3C08D" />
-          <Stack className="static-box">
-            <Box className="static-num">8</Box>
-            <Box className="static-text">Experience</Box>
+
+          <Stack className="benefit-box">
+            <Box className="benefit-icon">
+              <ReplayOutlinedIcon />
+            </Box>
+
+            <Box className="benefit-title">10-Day Return</Box>
+
+            <Box className="benefit-text">Easy returns within 10 days</Box>
           </Stack>
-          <Divider height="64" width="2" bg="#E3C08D" />
-          <Stack className="static-box">
-            <Box className="static-num">50+</Box>
-            <Box className="static-text">Menu</Box>
+
+          <Stack className="benefit-box">
+            <Box className="benefit-icon">
+              <VerifiedUserOutlinedIcon />
+            </Box>
+
+            <Box className="benefit-title">Secure Payment</Box>
+
+            <Box className="benefit-text">Your payment is always protected</Box>
           </Stack>
-          <Divider height="64" width="2" bg="#E3C08D" />
-          <Stack className="static-box">
-            <Box className="static-num">200+</Box>
-            <Box className="static-text">Clients</Box>
+
+          <Stack className="benefit-box">
+            <Box className="benefit-icon">
+              <FavoriteBorderOutlinedIcon />
+            </Box>
+
+            <Box className="benefit-title">Made With Love</Box>
+
+            <Box className="benefit-text">Every bouquet is carefully prepared</Box>
           </Stack>
         </Stack>
       </Container>

@@ -1,79 +1,62 @@
-import React, { useEffect } from "react";
-import Statistics from "./Statistics";
-import PopularDishes from "./PopularDishes";
-import NewDishes from "./NewDishes";
+import { CartItem } from "../../../lib/types/search";
+import { useEffect } from "react";
 import Advertisement from "./Advertisement";
-import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
-import { useDispatch} from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
-import { retrivePopularDishes } from "./selector";
-import { Product } from "../../../lib/types/product";
+import Statistics from "./Statistics";
+
+import { useDispatch } from "react-redux";
+
+import { setBestSellers, setNewArrivals } from "./slice";
+
 import ProductService from "../../services/ProductService";
-import { ProductCollection } from "../../../lib/enums/product.enum";
+
 import "../../../css/home.css";
-import MemberService from "../../services/MemberService";
-import { Member } from "../../../lib/types/member";
 
-// REDCE SLICE & SELECTOR
-const actionDispatch = (dispatch: Dispatch) => ({
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
-  setNewDishes:(data:Product[])=>dispatch(setNewDishes(data)),
-  setTopUsers:(data:Member[])=>dispatch(setTopUsers(data))
-});
+import BestSellers from "./BestSellers";
+import NewArrivals from "./NewArrivals";
 
+// REDUX DISPATCH
 
-export default function HomePage() {
-  const { setPopularDishes, setNewDishes, setTopUsers } =
-    actionDispatch(useDispatch());
+export default function HomePage({ onAdd }: { onAdd: (item: CartItem) => void }) {
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  const product = new ProductService();
-  product
-    .getProducts({
-      page: 1,
-      limit: 4,
-      order: "productViews",
-      productCollection: ProductCollection.DISH,
-    })
-    .then((data) => {
-      console.log("data passed here:", data);
-      setPopularDishes(data);
-    })
-    .catch((err) => console.log(err));
+  useEffect(() => {
+    const product = new ProductService();
 
+    // BEST SELLERS
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "productViews",
+      })
+      .then((data) => {
+        dispatch(setBestSellers(data));
+      })
+      .catch((err) => console.error(err));
 
- product
-    .getProducts({
-      page: 1,
-      limit: 4,
-      order: "createdAt",
-      productCollection: ProductCollection.DISH,
-    })
-    .then((data) => {
-     setNewDishes(data);
-    })
-    .catch((err) => console.log(err));
-
-    const member = new MemberService();
-    member
-    .getTopUsers()
-    .then((data) =>{
-    setTopUsers(data)
-    }).catch((err)=> console.log(err))
-}, []);
-
-
+    // NEW ARRIVALS
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "createdAt",
+      })
+      .then((data) => {
+        dispatch(setNewArrivals(data));
+      })
+      .catch((err) => console.error(err));
+  }, [dispatch]);
 
   return (
-    <div className={"homepage"}>
+    <div className="homepage">
       <Statistics />
-      <PopularDishes />
-      <NewDishes />
       <Advertisement />
-      <ActiveUsers />
+
+      <BestSellers onAdd={onAdd} />
+
+      <NewArrivals onAdd={onAdd} />
+
       <Events />
     </div>
   );

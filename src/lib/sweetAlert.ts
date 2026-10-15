@@ -1,21 +1,24 @@
+import axios from "axios";
 /** SweetAlertHandling **/
 import Swal from "sweetalert2";
 import { Messages } from "./config";
 
-export const sweetErrorHandling = async (err: any) => {
-  const error = err.response?.data ?? err;
-  const message = error?.message ?? Messages.error1;
-  await Swal.fire({
-    icon: "error",
-    text: message,
-    showConfirmButton: false,
-  });
+export const errorMessage = (error: unknown): string => {
+  let message = Messages.error1;
+  if (typeof error === "string") message = error;
+  else if (error instanceof Error) message = error.message;
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as { message?: unknown } | undefined;
+    if (typeof data?.message === "string") message = data.message;
+  }
+  return message;
 };
 
-export const sweetTopSuccessAlert = async (
-  msg: string,
-  duration: number = 2000
-) => {
+export const sweetErrorHandling = async (error: unknown) => {
+  await Swal.fire({ icon: "error", text: errorMessage(error), showConfirmButton: true });
+};
+
+export const sweetTopSuccessAlert = async (msg: string, duration: number = 2000) => {
   await Swal.fire({
     position: "top-end",
     icon: "success",
@@ -25,10 +28,7 @@ export const sweetTopSuccessAlert = async (
   });
 };
 
-export const sweetTopSmallSuccessAlert = async (
-  msg: string,
-  duration: number = 2000
-) => {
+export const sweetTopSmallSuccessAlert = async (msg: string, duration: number = 2000) => {
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -46,7 +46,7 @@ export const sweetTopSmallSuccessAlert = async (
 export const sweetFailureProvider = (
   msg: string,
   show_button: boolean = false,
-  forward_url: string = ""
+  forward_url: string = "",
 ) => {
   Swal.fire({
     icon: "error",

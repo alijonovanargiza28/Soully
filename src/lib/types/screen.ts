@@ -4,28 +4,27 @@ import { Product } from "./product";
 
 // REACT APP STATE
 export interface AppRootState {
-  productsPage: any;
+  productsPage: ProductsPageState;
   homePage: HomePageState;
-  ordersPage:OrdersPageState;
+  ordersPage: OrdersPageState;
 }
 
 // HOMEPAGE
 export interface HomePageState {
-  popularDishes: Product[];
-  newDishes: Product[];
-  topUsers: Member[];
+  bestSellers: Product[];
+  newArrivals: Product[];
 }
 
 // PRODUCT PAGE
-export interface ProductsPageState{
-  restaurant:Member | null;
-  chosenProduct:Product |null;
-  products:Product[];
+export interface ProductsPageState {
+  seller: Member | null;
+  chosenProduct: Product | null;
+  products: Product[];
 }
 
 // ORDERS PAGE
-export interface OrdersPageState{
-  pausedOrders:Order[]
-  processOrders:Order[]
-  finishedOrders:Order[]
+export interface OrdersPageState {
+  pausedOrders: Order[];
+  processOrders: Order[];
+  finishedOrders: Order[];
 }

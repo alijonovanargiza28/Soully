@@ -1,0 +1,70 @@
+@media (max-width: 900px) {
+  .other-navbar {
+    height: auto;
+    min-height: 130px;
+    padding-bottom: 24px;
+  }
+  .other-navbar .navbar-container {
+    margin-top: 24px;
+    height: auto;
+  }
+  .home-navbar .navbar-container .menu,
+  .other-navbar .navbar-container .menu {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .home-navbar .navbar-container .menu .links,
+  .other-navbar .navbar-container .menu .links {
+    min-width: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .home-navbar .navbar-container {
+    margin-top: 24px;
+    height: auto;
+  }
+  .home-navbar .navbar-container .menu .brand-logo,
+  .other-navbar .navbar-container .menu .brand-logo {
+    width: 150px;
+    height: auto;
+  }
+  .homepage .events-frame .events-area,
+  .homepage .events-frame .events-main,
+  .homepage .active-users-frame {
+    max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .home-navbar {
+    height: auto;
+    min-height: 650px;
+  }
+  .home-navbar .navbar-container .header-frame,
+  .home-navbar .navbar-container .head-main-txt,
+  .home-navbar .navbar-container .head-sub-txt {
+    max-width: 100%;
+    width: auto;
+  }
+  .home-navbar .navbar-container .head-main-txt {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+  .basket-frame {
+    width: min(450px, calc(100vw - 32px)) !important;
+    max-width: 100%;
+  }
+  .basket-frame .basket-info-box {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chosen-product .product-container {
+    flex-direction: column;
+  }
+  .chosen-product .chosen-product-slider,
+  .chosen-product .chosen-product-info {
+    width: 100%;
+    max-width: 100%;
+  }
+}
