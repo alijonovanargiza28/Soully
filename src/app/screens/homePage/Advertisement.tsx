@@ -4,6 +4,13 @@ import { useHistory } from "react-router-dom";
 import { Occasion } from "../../../lib/types/occasion";
 import OccasionService from "../../services/OccasionService";
 
+const occasionImages: Record<string, string> = {
+  wedding: "/img/occasions/wedding.png",
+  graduation: "/img/occasions/graduation.png",
+  anniversary: "/img/occasions/anniversary.png",
+  birthday: "/img/occasions/birthday.png",
+};
+
 export default function Advertisement() {
   const [occasions, setOccasions] = useState<Occasion[]>([]);
 
@@ -37,8 +44,6 @@ export default function Advertisement() {
   return (
     <section className="occasion-frame">
       <div className="occasion-header">
-        <span>SHOP BY OCCASION</span>
-
         <h2>Flowers for every special moment</h2>
 
         <p>Find the perfect flowers for every occasion and make someone's day unforgettable.</p>
@@ -48,7 +53,14 @@ export default function Advertisement() {
         {occasions.map((occasion) => (
           <div className="occasion-card" key={occasion._id}>
             <div className="occasion-image">
-              <img src={mediaUrl(occasion.occasionImage)} alt={occasion.occasionTitle} />
+              <img
+                src={
+                  occasionImages[occasion.occasionTitle.trim().toLowerCase()] ||
+                  mediaUrl(occasion.occasionImage)
+                }
+                alt={occasion.occasionTitle}
+                loading="lazy"
+              />
             </div>
 
             <div className="occasion-info">

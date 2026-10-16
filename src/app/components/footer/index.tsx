@@ -7,7 +7,7 @@ const Footers = styled.footer`
   width: 100%;
   background: #fff5f7;
   border-top: 1px solid #f1d9df;
-  padding: 70px 0 30px;
+  padding: var(--soully-section-space) 0 var(--soully-space-lg);
 
   .foot-category-title {
     font-size: 18px;
@@ -46,7 +46,7 @@ export default function Footer() {
   return (
     <Footers>
       <Container maxWidth="lg">
-        <Stack direction={{ xs: "column", md: "row" }} spacing={4} justifyContent="space-between">
+        <Stack direction={{ xs: "column", md: "row" }} spacing={3} justifyContent="space-between">
           {/* LEFT */}
           <Stack sx={{ width: { xs: "100%", md: 340 } }}>
             <Box
@@ -62,7 +62,7 @@ export default function Footer() {
 
             <Box
               sx={{
-                mt: 3,
+                mt: 2,
                 color: "#9b6873",
                 fontSize: 15,
                 lineHeight: "26px",
@@ -73,7 +73,7 @@ export default function Footer() {
               We create beautiful bouquets and floral arrangements for every special moment.
             </Box>
 
-            <Stack direction="row" gap={2} mt={3}>
+            <Stack direction="row" gap={2} mt={2}>
               <img src="/icons/facebook.svg" alt="Facebook" width={22} />
               <img src="/icons/twitter.svg" alt="Twitter" width={22} />
               <img src="/icons/instagram.svg" alt="Instagram" width={22} />
@@ -113,11 +113,11 @@ export default function Footer() {
           sx={{
             borderTop: "1px solid #e5c8cf",
             opacity: 0.6,
-            mt: 7,
+            mt: 3,
           }}
         />
 
-        <Stack alignItems="center" mt={3}>
+        <Stack alignItems="center" mt={2}>
           <Box className="copyright-txt">© 2026 Soully Flowers. All rights reserved.</Box>
         </Stack>
       </Container>

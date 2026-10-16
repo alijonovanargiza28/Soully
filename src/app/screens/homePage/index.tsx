@@ -28,7 +28,7 @@ export default function HomePage({ onAdd }: { onAdd: (item: CartItem) => void })
       .getProducts({
         page: 1,
         limit: 4,
-        order: "productViews",
+        order: "productSold",
       })
       .then((data) => {
         dispatch(setBestSellers(data));

@@ -1,0 +1,468 @@
+/* Shared layout density. Loaded after page and responsive styles. */
+:root {
+  --soully-space-sm: 10px;
+  --soully-space-md: 14px;
+  --soully-space-lg: 20px;
+  --soully-content-gap: 26px;
+  --soully-section-space: 40px;
+  --soully-panel-space: 20px;
+}
+
+/* Navigation and hero: content determines height rather than empty frames. */
+.home-navbar {
+  height: auto;
+  min-height: 0;
+  padding-bottom: var(--soully-section-space);
+}
+.home-navbar .navbar-container {
+  height: auto;
+  margin-top: var(--soully-section-space);
+}
+.home-navbar .navbar-container .header-frame {
+  height: auto;
+  margin-top: 52px;
+}
+.home-navbar .navbar-container .header-frame .detail {
+  max-width: 100%;
+}
+.home-navbar .navbar-container .header-frame .detail .head-main-txt,
+.home-navbar .navbar-container .header-frame .detail .wel-txt {
+  height: auto;
+  max-width: 100%;
+}
+.home-navbar .navbar-container .header-frame .detail .wel-txt {
+  margin-top: var(--soully-space-md);
+}
+.home-navbar .navbar-container .detail .signup {
+  margin-top: var(--soully-content-gap);
+}
+.other-navbar {
+  height: auto;
+  min-height: 0;
+  padding: var(--soully-space-lg) 0;
+}
+.other-navbar .navbar-container {
+  height: auto;
+  margin-top: 0;
+}
+.other-navbar .navbar-container .menu {
+  min-height: 72px;
+}
+
+/* Home and About sections use the same vertical rhythm. */
+.homepage .static-frame,
+.homepage .occasion-frame,
+.homepage .home-flower-section,
+.homepage .events-frame,
+.about-page .why-choose-frame,
+.about-page .active-users-frame {
+  padding: var(--soully-section-space) 0;
+}
+.homepage .static-frame {
+  padding: var(--soully-content-gap) 0;
+}
+.homepage .benefit-box {
+  min-height: 0;
+  padding: 0 var(--soully-space-lg);
+}
+.homepage .benefit-box:not(:last-child)::after {
+  top: 0;
+  height: 100%;
+}
+.homepage .benefit-icon {
+  margin-bottom: var(--soully-space-sm);
+}
+.homepage .benefit-title {
+  margin-bottom: 6px;
+}
+.homepage .occasion-header,
+.homepage .home-flower-section .category-title,
+.homepage .events-text,
+.about-page .active-users-frame .category-title {
+  margin: 0 0 var(--soully-content-gap);
+}
+.homepage .occasion-header {
+  padding: 0 var(--soully-space-md);
+}
+.homepage .occasion-header h2 {
+  margin: var(--soully-space-sm) 0;
+}
+.homepage .home-flower-section + .home-flower-section {
+  padding-top: 0;
+}
+.homepage .events-text {
+  width: 100%;
+  max-width: 100%;
+}
+.homepage .events-info {
+  padding: 0 0 var(--soully-space-lg);
+}
+.homepage .events-info-frame {
+  height: auto;
+  min-height: 0;
+}
+.homepage .events-info-frame > .events-img {
+  position: relative;
+  height: auto;
+  min-height: 320px;
+}
+.homepage .events-info-frame .events-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+.homepage .events-desc {
+  height: auto;
+  min-height: 320px;
+  padding: var(--soully-panel-space);
+  box-sizing: border-box;
+}
+.homepage .text-desc,
+.homepage .bott-info {
+  margin-top: var(--soully-space-lg);
+}
+.homepage .prev-next-frame {
+  margin-top: var(--soully-space-md);
+}
+.about-page .why-choose {
+  gap: var(--soully-content-gap);
+}
+.about-page .why-title {
+  margin-bottom: var(--soully-space-md);
+}
+.about-page .why-text {
+  margin-bottom: var(--soully-space-md);
+}
+.about-page .why-features {
+  margin-top: var(--soully-space-md);
+}
+.about-page .why-video-player {
+  height: 480px;
+  max-width: 100%;
+}
+.about-page .active-users-frame .main {
+  margin-top: 0;
+}
+.about-page .address {
+  margin-top: var(--soully-content-gap);
+}
+.about-page .address-area {
+  gap: var(--soully-space-sm);
+}
+.about-page .address iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 360px;
+  margin-top: 0;
+}
+
+/* Catalog: remove empty grid and page minimum heights. */
+.products-page,
+.products-page .products,
+.products-page .chosen-product {
+  min-height: 0;
+}
+.products-page .products .top-text {
+  min-height: 0;
+  margin-top: var(--soully-section-space);
+  gap: var(--soully-space-lg);
+}
+.products-page .products .products-filter-section {
+  margin-top: var(--soully-space-lg);
+}
+.products-page .products .list-category-section {
+  min-height: 0;
+  margin-top: var(--soully-space-lg);
+}
+.products-page .products .product-wrapper {
+  margin-top: var(--soully-space-lg);
+  gap: var(--soully-content-gap) var(--soully-space-lg);
+}
+.products .product-wrapper .no-data {
+  min-height: 160px;
+}
+.products-page .products .pagination-section {
+  margin: var(--soully-content-gap) 0;
+}
+.products-page .products .brands-logo {
+  min-height: 0;
+  margin-top: 0;
+}
+.products-page .products .brands-logo .family-brands {
+  padding-top: var(--soully-section-space);
+  padding-bottom: var(--soully-section-space);
+}
+.products-page .products .brands-logo .brand-list {
+  margin-top: var(--soully-content-gap);
+  gap: var(--soully-space-lg);
+}
+.products-page .products .address {
+  padding-bottom: var(--soully-section-space);
+}
+.products-page .products .address .address-area {
+  margin-top: var(--soully-section-space);
+}
+.products-page .products .address iframe {
+  margin-top: var(--soully-space-lg) !important;
+}
+.products-page .chosen-product .product-container {
+  margin-top: var(--soully-section-space);
+  margin-bottom: var(--soully-section-space);
+  gap: var(--soully-space-lg);
+}
+.products-page .chosen-product .chosen-product-slider {
+  height: 440px;
+  min-width: 0;
+  flex: 1;
+}
+.products-page .chosen-product .chosen-product-info {
+  min-height: 0;
+  padding: var(--soully-panel-space);
+  min-width: 0;
+  flex: 1;
+}
+.products-page .chosen-product .info-box .rating-box {
+  margin-top: var(--soully-space-md);
+}
+.products-page .chosen-product .info-box .product-desc {
+  margin: var(--soully-space-lg) 0;
+}
+.products-page .chosen-product .info-box .product-price {
+  margin: var(--soully-space-md) 0 var(--soully-space-lg);
+}
+.products-page .chosen-product .button-box {
+  margin-top: var(--soully-space-lg);
+}
+
+/* Orders, profile and help share page/panel spacing without forcing a viewport. */
+.order-page,
+.user-page,
+.help-page {
+  min-height: 0;
+  padding: var(--soully-section-space) 0;
+}
+.order-page .order-container,
+.user-page .my-page-frame,
+.help-page .contact-box {
+  gap: var(--soully-space-lg);
+}
+.order-page .order-left {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+.order-page .order-nav-frame {
+  margin-bottom: var(--soully-space-lg);
+}
+.order-page .order-main-box {
+  min-height: 0;
+  margin-bottom: var(--soully-space-lg);
+}
+.order-page .empty-orders {
+  min-height: 240px;
+  padding: var(--soully-space-lg);
+  box-sizing: border-box;
+}
+.order-page .empty-orders img {
+  width: 140px;
+  height: 140px;
+}
+.order-page .order-info-box,
+.user-page .my-page-frame .my-page-left,
+.user-page .order-info-box,
+.help-page .rules-box,
+.help-page .faq-box,
+.help-page .contact-info,
+.help-page .contact-form {
+  padding: var(--soully-panel-space);
+  box-sizing: border-box;
+}
+.user-page .my-page-frame .my-page-left {
+  min-width: 0;
+}
+.user-page .menu-name {
+  margin-bottom: var(--soully-space-lg);
+  padding-bottom: var(--soully-space-md);
+}
+.user-page .settings .member-media-frame {
+  margin-bottom: var(--soully-space-lg);
+}
+.help-page .help-header,
+.help-page .section-heading {
+  margin-bottom: var(--soully-content-gap);
+}
+.help-page .help-header p {
+  margin: var(--soully-space-sm) 0 0;
+}
+.help-page .help-menu {
+  margin-bottom: var(--soully-space-lg);
+}
+.help-page .contact-details {
+  margin-top: var(--soully-space-lg);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --soully-section-space: 30px;
+    --soully-content-gap: 20px;
+  }
+  .home-navbar .navbar-container {
+    margin-top: var(--soully-space-lg);
+  }
+  .home-navbar .navbar-container .header-frame {
+    margin-top: var(--soully-section-space);
+  }
+  .home-navbar .navbar-container .menu,
+  .other-navbar .navbar-container .menu {
+    gap: var(--soully-space-md);
+  }
+  .home-navbar .navbar-container .menu .links,
+  .other-navbar .navbar-container .menu .links {
+    min-width: 0;
+  }
+  .homepage .benefits {
+    flex-wrap: wrap;
+    gap: var(--soully-space-lg) 0;
+  }
+  .homepage .benefit-box {
+    width: 50%;
+  }
+  .homepage .benefit-box:nth-child(2)::after {
+    display: none;
+  }
+  .homepage .events-info-frame {
+    width: calc(100% - 32px) !important;
+  }
+  .homepage .events-info-frame > .events-img,
+  .homepage .events-info-frame .events-desc {
+    width: 50%;
+    min-width: 0;
+  }
+  .homepage .events-info-frame .events-img img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .products-page .chosen-product .product-container {
+    flex-direction: column;
+  }
+  .products-page .chosen-product .chosen-product-slider,
+  .products-page .chosen-product .chosen-product-info {
+    width: 100%;
+    flex: auto;
+  }
+  .products-page .chosen-product .chosen-product-slider {
+    height: 400px;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --soully-section-space: 24px;
+    --soully-panel-space: 14px;
+  }
+  .home-navbar {
+    min-height: 0;
+  }
+  .home-navbar .navbar-container .header-frame .detail,
+  .home-navbar .navbar-container .header-frame .detail .wel-txt,
+  .home-navbar .navbar-container .detail .signup {
+    width: 100%;
+    max-width: 100%;
+  }
+  .home-navbar .navbar-container .header-frame .detail .head-main-txt {
+    width: 100%;
+  }
+  .homepage .static-frame {
+    padding: var(--soully-section-space) 0;
+  }
+  .homepage .benefit-box {
+    padding: 0 var(--soully-space-sm);
+  }
+  .homepage .events-info-frame {
+    flex-direction: column;
+  }
+  .homepage .events-info-frame > .events-img {
+    width: 100%;
+    height: 220px;
+    min-height: 0;
+  }
+  .homepage .events-info-frame .events-img img {
+    height: 100%;
+    min-height: 0;
+  }
+  .homepage .events-info-frame .events-desc {
+    width: 100%;
+    min-height: 0;
+  }
+  .homepage .prev-next-frame {
+    max-width: 100%;
+  }
+  .about-page .why-choose {
+    gap: var(--soully-space-lg);
+  }
+  .about-page .why-video-player {
+    height: 300px;
+  }
+  .about-page .active-users-frame .cards-frame {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--soully-space-sm);
+  }
+  .about-page .address iframe {
+    height: 300px;
+  }
+  .products-page .products .top-text {
+    gap: var(--soully-space-md);
+  }
+  .products-page .products .product-wrapper {
+    gap: var(--soully-space-lg) var(--soully-space-sm);
+  }
+  .products-page .chosen-product .chosen-product-slider {
+    height: 340px;
+  }
+  .order-page .order-container,
+  .user-page .my-page-frame {
+    gap: var(--soully-space-lg);
+  }
+  .order-page .order-left {
+    width: 100%;
+    flex: auto;
+  }
+}
+
+/* Occasion-only density adjustment; shared section spacing stays unchanged. */
+.homepage .occasion-frame {
+  padding-block: max(20px, calc(var(--soully-section-space) * 0.8));
+}
+.homepage .occasion-header {
+  margin-bottom: calc(var(--soully-content-gap) * 0.85);
+}
+.homepage .occasion-header h2 {
+  margin: 0 0 8px;
+}
+
+/* Keep the hero's top border clear of the logo and navigation. */
+@media (min-width: 901px) {
+  .home-navbar .navbar-container {
+    margin-top: 96px;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .home-navbar .navbar-container {
+    margin-top: 80px;
+  }
+}
+
+/* Keep Benefits below the first screen instead of showing a clipped preview. */
+.home-navbar {
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+@media (min-width: 901px) {
+  .home-navbar .navbar-container {
+    margin-top: max(96px, calc(10svh + 32px));
+  }
+}

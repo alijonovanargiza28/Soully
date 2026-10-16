@@ -292,7 +292,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 4.3;
-  background: #f2e9ed;
+  background: #fff;
 }
 .home-flower-card__photo > a {
   display: block;
@@ -302,11 +302,11 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 450ms ease;
 }
 .home-flower-card:hover img {
-  transform: scale(1.035);
+  transform: none;
 }
 .home-flower-card__badge {
   position: absolute;
@@ -366,37 +366,6 @@
   outline: 3px solid #c97b86;
   outline-offset: -3px;
 }
-.home-flower-card__details {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 8px 12px;
-  padding: 18px;
-}
-.home-flower-card__name {
-  color: #382a30;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.home-flower-card__price {
-  color: #8f4d60;
-  font-size: 14px;
-  font-weight: 600;
-}
-.home-flower-card__details p {
-  grid-column: 1 / -1;
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #8b7a80;
-  font-size: 12px;
-  line-height: 1.6;
-}
 .home-flower-card__announcement {
   position: absolute;
   width: 1px;
@@ -434,14 +403,6 @@
   }
   .home-flower-card {
     border-radius: 12px;
-  }
-  .home-flower-card__details {
-    padding: 12px;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 5px;
-  }
-  .home-flower-card__name {
-    font-size: 14px;
   }
   .home-flower-card__badge {
     top: 9px;
@@ -507,7 +468,7 @@
   margin: auto;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 25px;
 }
 
@@ -525,18 +486,22 @@
 
 .occasion-image {
   width: 100%;
-  height: 300px;
+  height: 240px;
+  padding: 12px;
+  box-sizing: border-box;
   overflow: hidden;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fff;
 }
 
 .occasion-image img {
-  width: 300px;
+  display: block;
+  width: 100%;
   height: 100%;
-  /* object-fit: contain; */
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
 .occasion-card:hover .occasion-image img {
@@ -544,7 +509,7 @@
 }
 
 .occasion-info {
-  padding: 15px;
+  padding: 12px 15px 16px;
   text-align: center;
 }
 
@@ -552,14 +517,15 @@
   color: #74434e;
   font-family: "Roboto Serif", serif;
   font-size: 21px;
-  margin-bottom: 15px;
+  margin: 0 0 10px;
 }
 
 .occasion-info p {
   color: #80636a;
   font-size: 14px;
-  line-height: 1;
-  min-height: 45px;
+  line-height: 1.4;
+  min-height: 38px;
+  margin: 0;
 }
 
 .occasion-info button {
@@ -575,6 +541,28 @@
 
 .occasion-info button:hover {
   background: #74434e;
+}
+@media (max-width: 900px) {
+  .occasion-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .occasion-image {
+    height: 190px;
+    padding: 10px;
+  }
+  .occasion-info {
+    padding: 10px 10px 14px;
+  }
+  .occasion-info h3 {
+    font-size: 18px;
+  }
+  .occasion-info p {
+    font-size: 12px;
+    min-height: 50px;
+  }
 }
 /** ACTIVE USERS **/
 /* =========================================================

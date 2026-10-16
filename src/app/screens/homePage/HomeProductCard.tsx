@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { mediaUrl } from "../../../lib/media";
 import { Product } from "../../../lib/types/product";
+import ProductCardDetails from "../../components/productCardDetails";
 import { CartItem } from "../../../lib/types/search";
 
 export interface HomeProductCardProps {
@@ -55,13 +56,7 @@ export default function HomeProductCard({ product, onAdd }: HomeProductCardProps
           {available ? (added ? "Added to Cart" : "Add to Cart") : "Sold out"}
         </button>
       </div>
-      <div className="home-flower-card__details">
-        <Link to={detailUrl} className="home-flower-card__name">
-          {product.productName}
-        </Link>
-        <span className="home-flower-card__price">${product.productPrice.toFixed(2)}</span>
-        <p>{product.productDesc || "Thoughtfully arranged, made with love."}</p>
-      </div>
+      <ProductCardDetails product={product} />
       <span className="home-flower-card__announcement" role="status">
         {added ? `${product.productName} added to cart` : ""}
       </span>

@@ -1,0 +1,73 @@
+.flower-card-details {
+  width: 100%;
+  min-width: 0;
+  padding: 18px;
+  box-sizing: border-box;
+  text-align: left;
+  background: #fff;
+}
+.flower-card-details__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+.flower-card-details__price {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #a04e69;
+  font-size: 18px;
+  font-weight: 700;
+}
+.flower-card-details__stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  background: #fbe4ec;
+  color: #b43d66;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.flower-card-details__stock svg {
+  width: 15px;
+  height: 15px;
+}
+.flower-card-details__name {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #382a30;
+  font-family: "Roboto Serif", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.flower-card-details__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  min-height: 3.2em;
+  margin: 10px 0 0;
+  color: #8b7a80;
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .flower-card-details {
+    padding: 12px;
+  }
+  .flower-card-details__price {
+    font-size: 15px;
+  }
+  .flower-card-details__name {
+    font-size: 16px;
+  }
+}

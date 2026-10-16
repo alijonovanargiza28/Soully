@@ -1,6 +1,6 @@
+import ProductCardDetails from "../../components/productCardDetails";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, Container, Stack } from "@mui/material";
@@ -297,15 +297,7 @@ export default function Products(props: ProductsProps) {
 
                       {/* DESCRIPTION */}
 
-                      <Box className={"product-desc"}>
-                        <span className={"product-title"}>{product.productName}</span>
-
-                        <div className={"product-desc"}>
-                          <MonetizationOnIcon />
-
-                          {product.productPrice}
-                        </div>
-                      </Box>
+                      <ProductCardDetails product={product} />
                     </Stack>
                   );
                 })

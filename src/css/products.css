@@ -431,7 +431,9 @@
 
   height: 285px;
 
-  background-size: cover;
+  background-color: #fff;
+
+  background-size: contain;
 
   background-position: center;
 
@@ -1074,7 +1076,7 @@
 
   height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* INFO */

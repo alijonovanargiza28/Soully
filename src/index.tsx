@@ -9,6 +9,7 @@ import theme from "./app/MaterialTheme";
 import { store } from "./app/store";
 import "./css/index.css";
 import "./css/responsive.css";
+import "./css/spacing.css";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

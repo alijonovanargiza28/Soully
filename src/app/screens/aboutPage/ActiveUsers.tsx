@@ -67,14 +67,7 @@ export default function ActiveUsers() {
         <div className={"address"}>
           <Container>
             <Stack className={"address-area"}>
-              <Box className={"title"}>Flower shop in Tashkent</Box>
-
-              <Typography>Flowers City · Shota Rustaveli 120, Tashkent</Typography>
-
               <iframe
-                style={{
-                  marginTop: "60px",
-                }}
                 src="https://www.google.com/maps?q=Flowers%20City%2C%20Shota%20Rustaveli%20120%2C%20Tashkent%2C%20Uzbekistan&output=embed"
                 loading="lazy"
                 width="1320"
