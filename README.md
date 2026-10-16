@@ -19,3 +19,7 @@ The development frontend opens on port 3000; the API defaults to port 3003. Keep
 Products default to All. Category, search, sort and page are stored in the URL. API errors have a retry action and are separate from an empty catalog. The matching API version must return both `result` and `pagination`.
 
 The contact form opens an email draft; it does not send email automatically. Checkout has no payment-provider integration. See the delivery audit report for test coverage and remaining production work.
+
+## Production build
+
+`npm run build` uses `/api` by default even when local `.env` points to localhost. The deployment Nginx proxy forwards `/api/` to Express and serves `index.html` for React page refreshes. For a separate backend, provide an explicit HTTPS `REACT_APP_API_URL` in the build environment; configure the matching backend CORS origin and cookie policy.

@@ -75,7 +75,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
         orderStatus: OrderStatus.PROCESS,
       };
 
-      const confirmation = window.confirm("Do you want to proceed with payment?");
+      const confirmation = window.confirm("Confirm this order? Available stock will be reduced.");
 
       if (confirmation) {
         const order = new OrderService();
@@ -160,7 +160,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
                   className="pay-button"
                   onClick={processOrderHandler}
                 >
-                  Payment
+                  Confirm Order
                 </Button>
               </div>
             </Box>
